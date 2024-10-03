@@ -26,3 +26,4 @@ export const createUserService = async (userData: UserDto): Promise<IUser> => {
     id++;
     return newUser;
 }
+
