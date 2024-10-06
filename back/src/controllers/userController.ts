@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import IUser from "../interfaces/IUser";
 import { createUserService, getUsersService } from "../services/userServices";
+import CredentialDto from "../dto/CredentialDto";
 
 export const getUsers = async (req: Request, res: Response) => {
     const users: IUser[] = await getUsersService();
@@ -13,8 +14,12 @@ export const getUserId = async (req: Request, res: Response) => {
 }
 
 export const createUser = async (req: Request, res: Response) => {
-    const { name, email, active} = req.body;
-    const newUser: IUser = await createUserService({ name, email, active});
+    const { name, email, birthdate, nDni} = req.body;
+    const credentialsData: CredentialDto = {
+        username: req.body.username,
+        password: req.body.password
+    }
+    const newUser: IUser = await createUserService({ name, email, birthdate, nDni}, credentialsData);
     return res.status(201).json(newUser);
 }
 
