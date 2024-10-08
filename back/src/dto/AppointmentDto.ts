@@ -1,8 +1,10 @@
+import { AppointmentStatus } from "../enums/AppointmentStatus";
+
 interface AppointmentDto {
     date: Date,
-    time: Date,
+    time: string,
     userId: number,
-    status: 'active' | 'cancelled'
+    status: AppointmentStatus
 }
 
 export default AppointmentDto; 

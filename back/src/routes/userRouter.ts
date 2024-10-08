@@ -1,12 +1,12 @@
 import { Router } from "express";
-import {createUser, getUserId, getUsers, loginUser} from "../controllers/userController"
+import {createNewUser, getAllUsers, getUserById, loginUser} from "../controllers/userController"
 
 const userRouter = Router()
 
 //Rutas....
-userRouter.get("/", getUsers)
-userRouter.get("/:id", getUserId)
-userRouter.post("/register", createUser)
+userRouter.get("/", getAllUsers)
+userRouter.get("/:id", getUserById)
+userRouter.post("/register", createNewUser)
 userRouter.post("/login", loginUser)
 
 export default userRouter;

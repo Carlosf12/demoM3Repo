@@ -1,28 +1,30 @@
-import {Request, Response} from "express";
-import IUser from "../interfaces/IUser";
-import { createUserService, getUsersService } from "../services/userServices";
-import CredentialDto from "../dto/CredentialDto";
+import { Request, Response } from "express";
+import { createNewUserService, getAllUsersService, getUserByIdService } from "../services/userServices";
 
-export const getUsers = async (req: Request, res: Response) => {
-    const users: IUser[] = await getUsersService();
-    return res.status(200).json(users);
+export const getAllUsers = async (req: Request, res: Response): Promise<Response> => {
+    const allUsers = await getAllUsersService();
+    return res.status(200).json(allUsers);
 }
 
-
-export const getUserId = async (req: Request, res: Response) => {
-    return res.status(200).json({message:"Route to GET user by ID"})
-}
-
-export const createUser = async (req: Request, res: Response) => {
-    const { name, email, birthdate, nDni} = req.body;
-    const credentialsData: CredentialDto = {
-        username: req.body.username,
-        password: req.body.password
+export const getUserById = async (req: Request, res: Response): Promise<Response> => {
+    try{
+        const { id } = req.params;
+        const foundUser = await getUserByIdService(Number(id))
+        return foundUser 
+        ? res.status(200).json(foundUser) 
+        : res.status(404).json({message: "USER DOES NOT EXIST"})
+    }catch(err){
+        return res.status(500).json(err)
     }
-    const newUser: IUser = await createUserService({ name, email, birthdate, nDni}, credentialsData);
-    return res.status(201).json(newUser);
 }
 
 export const loginUser = async (req: Request, res: Response) => {
-    return res.status(200).json({message:"Route to POST for loginUser"})
+    return res.status(200).json({ message: "Route to POST for loginUser" })
+}
+
+export const createNewUser = async (req: Request, res: Response): Promise<Response> => {
+    const newUser = await createNewUserService(req.body);
+    return res
+    .status(201)
+    .json({message:'Success', newUser})
 }

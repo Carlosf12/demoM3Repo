@@ -1,36 +1,41 @@
 import UserDto from "../dto/UserDto";
 import IUser from "../interfaces/IUser";
 import { createCredentialsService } from "./credentialServices";
-import CredentialDto from "../dto/CredentialDto";
 
-let users: IUser[] = [{
-    id: 1,
-    name: "carlos",
-    email: "cf@mail.com",
-    birthdate: new Date (1990, 10, 20),
-    nDni: '12345678',
-    credentialsId: 1
-}]
+let users: IUser[] = []
 
-let id: number = 2
+/*
+{
+    "name":"Mario Gonzales",
+    "email":"mgonzales22@gmail.com",
+    "birthdate":"18/09/1978",
+    "nDni":123123123,
+    "username":"mgonzales",
+    "password":"mgonza123"
+} 
+*/
+let id: number = 1
 
-export const getUsersService = async (): Promise<IUser[]> => {
+export const getAllUsersService = async (): Promise<IUser[]> => {
     return users;
 }
 
-export const getUserByIdService = async (userId: number): Promise<IUser | undefined> => {
-    return users.find(user => user.id === userId);
+export const getUserByIdService = async (id: number): Promise<IUser | undefined> => {
+   const foundUser = users.find((user) => user.id === id);
+   return foundUser;
 }
 
 
-export const createUserService = async (userData: UserDto, credentialsData: CredentialDto): Promise<IUser> => {
+export const createNewUserService = async (userData: UserDto): Promise<IUser> => {
+    const { username, password, name, email, birthdate, nDni} = userData;
+    const newCredsId = await createCredentialsService({username, password});
     const newUser: IUser = {
-        id, 
-        name: userData.name,
-        email: userData.email,
-        birthdate: userData.birthdate,
-        nDni: userData.nDni,
-        credentialsId: await createCredentialsService(credentialsData.username,credentialsData.password);
+        id,
+        name,
+        email,
+        birthdate,
+        nDni,
+        credentialsId: newCredsId
     }
     users.push(newUser);
     id++;

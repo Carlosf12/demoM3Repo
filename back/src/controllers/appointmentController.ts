@@ -1,14 +1,28 @@
 import { Request, Response } from "express";
+import { cancelAppointmentService, createNewAppointmentService, getAllAppointmentsByIdService, getAppointmentByIdService } from "../services/appointmentServices";
 
-export const getAppointments = async (req: Request, res: Response): Promise<Response> => {
-    return res.status(200).json({message:"Route to GET appointments successful!"})
+export const getAllAppointments = async (req: Request, res: Response): Promise<Response> => {
+    const allAppointments =  await getAllAppointmentsByIdService();
+    return res.status(200).json(allAppointments);
 }
-export const getAppointmentId = async (req: Request, res: Response): Promise<Response> => {
-    return res.status(200).json({message:"Route to GET getAppointmentId successful!"})
+
+export const getAppointmentById = async (req: Request, res: Response): Promise<Response> => {
+    const {id} = req.params;
+    const foundApp = await getAppointmentByIdService(Number(id));
+    return foundApp
+    ? res.status(200).json(foundApp)
+    : res.status(404).json({error: 'Appointment DOES NOT EXIST'})
 }
 export const createAppointment = async (req: Request, res: Response): Promise<Response> => {
-    return res.status(201).json({message:"Route to POST createAppointment successful!"})
+    const newApp = await createNewAppointmentService(req.body);
+    return newApp 
+    ? res.status(201).json({message:"Success", newApp})
+    : res.status(404).json({error: "User DOES NOT EXIST"})
 }
 export const cancelAppointment = async (req: Request, res: Response): Promise<Response> => {
-    return res.status(201).json({message:"Route to POST cancelAppointment successful!"})
+    const {id} = req.params
+    const cancelApp = await cancelAppointmentService(Number(id))
+    return cancelApp
+    ? res.status(200).json('Appointment Cancelled')
+    : res.status(404).json('Appointment DOES NOT EXIST')
 }
