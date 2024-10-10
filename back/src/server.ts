@@ -1,6 +1,7 @@
 import express from "express";
 import router from "./routes/indexRouter";
 import morgan from "morgan";
+import "reflect-metadata"
 
 const server = express();
 

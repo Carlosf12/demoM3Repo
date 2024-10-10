@@ -1,43 +1,43 @@
+import { AppointmentModel, UserModel } from "../config/data-source";
 import AppointmentDto from "../dto/AppointmentDto";
+import { Appointment } from "../entities/Appointment";
 import { AppointmentStatus } from "../enums/AppointmentStatus";
-import IAppointment from "../interfaces/IAppointment";
 
-const appintmentsDB: IAppointment[] = [];
-let id: number = 1;
-
-export const getAllAppointmentsByIdService = async (): Promise<IAppointment[]> => {
-    return appintmentsDB
+export const getAllAppointmentsByIdService = async (): Promise<Appointment[]> => {
+    const appointments = await AppointmentModel.find()
+    return appointments
 };
 
-export const getAppointmentByIdService = async (id: number): Promise<IAppointment> => {
-    const foundAppointment = appintmentsDB.find((app) => app.id === id);
+export const getAppointmentByIdService = async (id: number): Promise<Appointment | null> => {
+    const foundAppointment = await AppointmentModel.findOneBy({id});
     if(!foundAppointment) throw new Error("Appointment NOT FOUND");
     return foundAppointment;
+
 };
 
-export const createNewAppointmentService = async (appData: AppointmentDto): Promise<IAppointment | undefined> => {
-    const {date, time , userId} = appData;
+export const createNewAppointmentService = async (appData: AppointmentDto): Promise<Appointment | undefined> => {
+    const {date, time, userId} = appData;
 
-    const foundApp = appintmentsDB.find((app) => app.id === id)
-
-    if(foundApp){
-            const newAppointment: IAppointment = {
-                id,
-                date,
-                time,
-                status: AppointmentStatus.ACTIVE,
-                userId
-            }
-            appintmentsDB.push(newAppointment);
-            id++;
-            return newAppointment;
-    } else return undefined;
-};
-
-export const cancelAppointmentService = async (id: number): Promise<IAppointment | undefined> => {
-    const foundApp: IAppointment = await getAppointmentByIdService(id);
-    if(foundApp){
-        foundApp.status = AppointmentStatus.CANCELLED
+    const newAppointment = new Appointment();
+    newAppointment.date = date;
+    newAppointment.time = time;
+    newAppointment.status = AppointmentStatus.ACTIVE;
+    
+    const user  = await UserModel.findOneBy({id: userId})
+    
+    if(!user) {
+    throw new Error("User NOT FOUND'")
     }
-    return foundApp
+    newAppointment.user = user
+    await AppointmentModel.save(newAppointment);
+    return newAppointment;
+};
+
+export const cancelAppointmentService = async (id: number): Promise<Appointment | undefined> => {
+    const foundAppointment = await getAppointmentByIdService(id);
+    if(!foundAppointment) return undefined;
+
+    foundAppointment.status = AppointmentStatus.CANCELLED
+    await AppointmentModel.save(foundAppointment);
+    return foundAppointment
 }

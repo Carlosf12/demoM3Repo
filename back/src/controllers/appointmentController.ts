@@ -16,8 +16,8 @@ export const getAppointmentById = async (req: Request, res: Response): Promise<R
 export const createAppointment = async (req: Request, res: Response): Promise<Response> => {
     const newApp = await createNewAppointmentService(req.body);
     return newApp 
-    ? res.status(201).json({message:"Success", newApp})
-    : res.status(404).json({error: "User DOES NOT EXIST"})
+    ? res.status(201).json(newApp)
+    : res.status(404).json({error: "USER DOES NOT EXIST"})
 }
 export const cancelAppointment = async (req: Request, res: Response): Promise<Response> => {
     const {id} = req.params

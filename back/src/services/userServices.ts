@@ -1,44 +1,40 @@
+import { UserModel } from "../config/data-source";
 import UserDto from "../dto/UserDto";
-import IUser from "../interfaces/IUser";
+import { User } from "../entities/User";
 import { createCredentialsService } from "./credentialServices";
 
-let users: IUser[] = []
 
-/*
-{
-    "name":"Mario Gonzales",
-    "email":"mgonzales22@gmail.com",
-    "birthdate":"18/09/1978",
-    "nDni":123123123,
-    "username":"mgonzales",
-    "password":"mgonza123"
-} 
-*/
-let id: number = 1
-
-export const getAllUsersService = async (): Promise<IUser[]> => {
-    return users;
+export const getAllUsersService = async (): Promise<User[]> => {
+    const users = await UserModel.find(
+        {
+            relations: {
+                appointments: true
+            }
+        }
+    )
+    return users
 }
 
-export const getUserByIdService = async (id: number): Promise<IUser | undefined> => {
-   const foundUser = users.find((user) => user.id === id);
-   return foundUser;
+export const getUserByIdService = async (id: number): Promise<User | null> => {
+    const user = await UserModel.findOneBy({id})
+    return user
 }
 
 
-export const createNewUserService = async (userData: UserDto): Promise<IUser> => {
-    const { username, password, name, email, birthdate, nDni} = userData;
-    const newCredsId = await createCredentialsService({username, password});
-    const newUser: IUser = {
-        id,
-        name,
-        email,
-        birthdate,
-        nDni,
-        credentialsId: newCredsId
-    }
-    users.push(newUser);
-    id++;
-    return newUser;
+export const createNewUserService = async (userData: UserDto): Promise<User> => {
+    const { username, password, name, email, birthdate, nDni } = userData;
+    const newCredId = await createCredentialsService({ username, password })
+
+    const newUser = new User();
+    newUser.name = name;
+    newUser.email = email;
+    newUser.birthdate = birthdate;
+    newUser.nDni = nDni;
+    newUser.credential = newCredId
+
+    await UserModel.save(newUser)
+    return newUser
 }
+
+
 

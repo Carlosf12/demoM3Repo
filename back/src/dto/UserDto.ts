@@ -2,7 +2,7 @@ interface UserDto {
     name: string,
     email: string,
     birthdate: Date,
-    nDni: string,
+    nDni: number,
     username: string,
     password: string
 }

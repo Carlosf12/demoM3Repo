@@ -23,8 +23,7 @@ export const loginUser = async (req: Request, res: Response) => {
 }
 
 export const createNewUser = async (req: Request, res: Response): Promise<Response> => {
-    const newUser = await createNewUserService(req.body);
-    return res
-    .status(201)
-    .json({message:'Success', newUser})
+    const { name , email, birthdate, nDni, username, password} = req.body;
+    const newUser = await createNewUserService({name , email, birthdate, nDni, username, password});
+    return res.status(201).json({message: "User Created", newUser})
 }
