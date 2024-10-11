@@ -9,8 +9,13 @@ export const getAllAppointmentsByIdService = async (): Promise<Appointment[]> =>
 };
 
 export const getAppointmentByIdService = async (id: number): Promise<Appointment | null> => {
-    const foundAppointment = await AppointmentModel.findOneBy({id});
-    if(!foundAppointment) throw new Error("Appointment NOT FOUND");
+    const foundAppointment = await AppointmentModel.findOne({
+        where: {id},
+        relations: ["user"]
+    });
+    if(!foundAppointment) {
+        throw new Error("Appointment NOT FOUND");   
+    }
     return foundAppointment;
 
 };

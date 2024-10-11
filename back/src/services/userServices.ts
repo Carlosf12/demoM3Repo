@@ -8,7 +8,8 @@ export const getAllUsersService = async (): Promise<User[]> => {
     const users = await UserModel.find(
         {
             relations: {
-                appointments: true
+                appointments: true,
+                credential: true
             }
         }
     )
@@ -16,7 +17,10 @@ export const getAllUsersService = async (): Promise<User[]> => {
 }
 
 export const getUserByIdService = async (id: number): Promise<User | null> => {
-    const user = await UserModel.findOneBy({id})
+    const user = await UserModel.findOne({
+        where:{id},
+        relations: ["appointments"]
+    })
     return user
 }
 
@@ -30,7 +34,7 @@ export const createNewUserService = async (userData: UserDto): Promise<User> => 
     newUser.email = email;
     newUser.birthdate = birthdate;
     newUser.nDni = nDni;
-    newUser.credential = newCredId
+    newUser.credential = newCredId;
 
     await UserModel.save(newUser)
     return newUser

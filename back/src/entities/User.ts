@@ -18,13 +18,15 @@ export class User {
     @Column({length: 100})
     email: string
 
-    @Column()
+    @Column({
+        type: Date
+    })
     birthdate: Date
 
     @Column("integer")
     nDni: number
     
-    @OneToOne(() => Credential)
+    @OneToOne(() => Credential, (credential) => credential.user)
     @JoinColumn()
     credential: Credential
 
