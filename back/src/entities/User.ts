@@ -26,7 +26,12 @@ export class User {
     @Column("integer")
     nDni: number
     
-    @OneToOne(() => Credential, (credential) => credential.user)
+    @OneToOne(() => Credential, (credential) => credential.user,
+    {
+        cascade: true,
+        onDelete: "CASCADE",
+    }
+    )
     @JoinColumn()
     credential: Credential
 

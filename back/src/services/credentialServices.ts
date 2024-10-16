@@ -1,6 +1,7 @@
 import { CredentialModel } from "../config/data-source";
 import CredentialDto from "../dto/CredentialDto";
 import { Credential } from "../entities/Credential";
+import { User } from "../entities/User";
 
 
 export const createCredentialsService = async (credentialsData: CredentialDto): Promise<Credential> => {
@@ -12,17 +13,13 @@ export const createCredentialsService = async (credentialsData: CredentialDto): 
    return newCredential
 };
 
-export const checkCredentialsService = async (credentials: CredentialDto): Promise<number> => {
+export const checkCredentialsService = async (credentials: CredentialDto): Promise<User | undefined> => {
    const {username, password} = credentials;
-   const foundCredentials = await CredentialModel.findOneBy({username});
+   const foundCredentials = await CredentialModel.findOne({
+      where: {username},
+      relations: ["user"]
+  });
 
-   if(!foundCredentials) {
-      throw new Error("Incorrect username or password");
-   }
-   if(foundCredentials.password === password) {
-      return foundCredentials.id
-   } else {
-      throw new Error("Incorrect information")
-   }
+   if(foundCredentials?.password === password) return foundCredentials?.user
 };
 

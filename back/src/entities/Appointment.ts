@@ -10,7 +10,9 @@ export class Appointment {
     @PrimaryGeneratedColumn()
     id:number
 
-    @Column()
+    @Column({
+        type: Date
+    })
     date: Date
 
     @Column()

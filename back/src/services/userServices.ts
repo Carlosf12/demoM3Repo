@@ -4,7 +4,8 @@ import { User } from "../entities/User";
 import { createCredentialsService } from "./credentialServices";
 
 
-export const getAllUsersService = async (): Promise<User[]> => {
+export const getAllUsersService = async (): Promise<User[] | null> => {
+    
     const users = await UserModel.find(
         {
             relations: {
@@ -13,15 +14,32 @@ export const getAllUsersService = async (): Promise<User[]> => {
             }
         }
     )
-    return users
+    if(users.length === 0) {
+        return null    
+    } else {
+        return users
+    }
 }
 
-export const getUserByIdService = async (id: number): Promise<User | null> => {
-    const user = await UserModel.findOne({
-        where:{id},
+export const getUserByIdService = async (user: {id: number | null, email: string | null}): Promise<User | null> => {
+    const {id, email } = user;
+    
+    interface IWhere {
+        id?: number,
+        email?: string
+    }
+    
+    const  whereClause: IWhere = {};
+
+    if(id) whereClause.id = id;
+    if(email) whereClause.email = email
+
+
+    const foundUser = await UserModel.findOne({
+        where: whereClause,
         relations: ["appointments"]
     })
-    return user
+    return foundUser
 }
 
 

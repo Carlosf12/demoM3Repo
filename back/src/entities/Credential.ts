@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
 
 
@@ -11,6 +11,7 @@ export class Credential {
     id: number
 
     @Column({length: 100})
+    @Index({unique: true})
     username: string
 
     @Column({length: 100})
