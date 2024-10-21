@@ -1,10 +1,64 @@
-.container{
+:root {
+    --primary-color: #007bff; /* Replace with your desired primary color */
+    --secondary-color: #6c757d; /* Replace with your desired secondary color */
+    --tertiary-color: #ffc107; /* Replace with your desired tertiary color */
+    --white: #fff;
+    --black: #000;
+    --gray: #6c757d;
+    --success: #28a745;
+    --error: #dc3545;
+    --warning: #ffc107;
+    --info: #17a2b8;
+  }
+
+.navBarContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin:  10px;
     justify-content: center;
-    border: 1px solid palevioletred;
-    border-radius: 16px;
-    background-color: rgb(207, 120, 120);
-}
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--primary-color);
+
+  }
+  
+  .logoSection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logoSection img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .linkSection {
+    display: flex;
+    justify-content: space-between;
+    gap: 10rem;
+    color: var(--secondary-color);
+  }
+
+  .linkSection span:hover {
+    color: var(--tertiary-color); 
+    text-decoration: underline; 
+  }
+  
+  .linkSection span {
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .avatarSection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatarSection img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
