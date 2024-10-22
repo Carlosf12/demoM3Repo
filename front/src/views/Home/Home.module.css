@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 2rem;
+  }
+  
+  h3 {
+    text-align: center;
+    color: #555050;
+    font-size: 2rem;
+    margin-bottom: 50px;
+  }

@@ -1,15 +1,11 @@
-import Navbar from "../../components/Navbar/Navbar";
-
-
+import styles from './Home.module.css'
+import { ImgText } from '../../components/ImgText/ImgText';
 const Home = () => {
     return (
-        <>
-            <Navbar />
             <div className={styles.container}>
                 <h3>Bienvenido al Gestor de Turnos</h3>
-                
+                <ImgText />
             </div>
-        </>
     )
 }
 

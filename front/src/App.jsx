@@ -1,11 +1,13 @@
 import './App.css'
-import Navbar from './components/Navbar/Navbar'
+import Home from './views/Home/Home'
+import Navbar from "../src/components/Navbar/Navbar"
 
 function App() {
 
   return (
     <>
       <Navbar />
+      <Home />
     </>
   )
 }
