@@ -7,8 +7,8 @@ import styles from "./Appointments.module.css"
 export const Appointments = () => {
 
     const [appointments] = useState(allAppointments);
-    const handleCancelApp = () => {
-        console.log("Turno Cancelado");
+    const handleCancelApp = (id) => {
+        console.log(`Turno ${id} cancelado`);
     }
 
     return (
@@ -22,7 +22,7 @@ export const Appointments = () => {
                     date={app.date}
                     time={app.time}
                     status={app.status}
-                    handleCancelApp={handleCancelApp}
+                    handleCancelApp={() => handleCancelApp(app.id)}
                 />
             ))}
         </div>
