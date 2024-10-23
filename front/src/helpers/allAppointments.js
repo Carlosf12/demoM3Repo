@@ -1,4 +1,4 @@
-export const appointments = [
+export const allAppointments = [
   {
     "date": "2023-10-15",
     "time": "10:00 AM",

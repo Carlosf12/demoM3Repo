@@ -1,12 +1,12 @@
 import styles from './Home.module.css'
-import { ImgText } from '../../components/ImgText/ImgText';
+import { Appointments } from '../../components/Appointments/Appointments';
 const Home = () => {
     return (
             <div className={styles.container}>
                 <h3>Bienvenido al Gestor de Turnos</h3>
-                <ImgText />
+                <Appointments />
             </div>
-    )
+    )   
 }
 
 export default Home;
