@@ -1,13 +1,13 @@
 import './App.css'
-import Home from './views/Home/Home'
 import Navbar from "../src/components/Navbar/Navbar"
+import MyAppointments from './views/MyAppointments/MyAppotinments'
 
 function App() {
 
   return (
     <>
       <Navbar />
-      <Home />
+      <MyAppointments />
     </>
   )
 }
