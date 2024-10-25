@@ -6,15 +6,23 @@ import axios from 'axios'
 export const Appointments = () => {
 
     const [appointments, setAppointments] = useState([]);
-
-    const handleCancelApp = (id) => {
-        console.log(`Turno ${id} cancelado`);
-    }
+    const [flag, setFlag] = useState(false)
 
     useEffect(()=>{
         axios.get("http://localhost:3000/appointments")
-        .then(res=> setAppointments(res.data))
-    },[])
+        .then(res => setAppointments(res.data))
+        .catch((err) => alert(err.res.data.message))
+    },[flag]);
+
+
+    const handleCancelApp = async (id) => {
+        try {
+            await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
+            setFlag(!flag)
+        } catch (error) {
+            alert(error)
+        }
+    };
 
     return (
         <div className={styles.container}>
