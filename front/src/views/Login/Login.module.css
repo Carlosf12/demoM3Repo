@@ -8,7 +8,7 @@
     flex-direction: column;
   }
   
-  .error {
+  .errorMessage {
     color: red;
     font-size: 12px;
   }

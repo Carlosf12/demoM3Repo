@@ -1,7 +1,7 @@
 const validateRegister = (input) => {
     const errors = {};
 
-    const maxLength = 25; // Longitud máxima permitida
+    const maxLength = 30; // Longitud máxima permitida
 
     // Nombre: Solo letras, máximo 25 caracteres
     if (input.name && /\d/.test(input.name)) {
@@ -10,14 +10,14 @@ const validateRegister = (input) => {
         errors.name = `El nombre no puede exceder los ${maxLength} caracteres`;
     }
 
-    // Email: inputato de correo electrónico, máximo 25 caracteres
+    // Email: Dato de correo electrónico, máximo 25 caracteres
     if (!input.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email)) {
         errors.email = "Ingrese un email válido";
     } else if (input.email.length > maxLength) {
         errors.email = `El email no puede exceder los ${maxLength} caracteres`;
     }
 
-    // Fecha de nacimiento: inputato de fecha (validar si es necesario)
+    // Fecha de nacimiento: Dato de fecha (validar si es necesario)
     if (!input.birthdate) {
         errors.birthdate = "La fecha de nacimiento es obligatoria";
     } else {

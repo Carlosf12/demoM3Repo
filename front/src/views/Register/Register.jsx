@@ -13,14 +13,10 @@ const Register = () => {
         password: ""
     });
 
-    const [errors, setErrors] = useState({
-        name: '',
-        email: '',
-        birthdate: '',
-        nDni: '',
-        username: '',
-        password: ''
-    })
+    const [errors, setErrors] = useState({});
+
+    const [onTouched, setOnTouched] = useState({})
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -28,15 +24,19 @@ const Register = () => {
 
         setErrors(validationErrors);
 
-        if (Object.keys(validationErrors).length === 0) {
             try {
-                const response = await axios.post("http://localhost:3000/users/register", form);
-                console.log(response);
-                alert("Registro Exitoso");
+                if(!Object.keys(errors).length === 0){
+                    const response = await axios.post("http://localhost:3000/users/register", form);
+                    console.log(response);
+                    alert("Registro Exitoso");
+                }
+                else{
+                    alert("Errores en el formulario")
+                }
             } catch (error) {
                 console.error("Registro fallido", error.response.data);
             }
-        }
+        
     }
 
     const handleInputChange = (event) => {
@@ -44,6 +44,13 @@ const Register = () => {
         setForm({ ...form, [name]: value });
         const newErrors = validateRegister(form);
         setErrors({ ...newErrors });
+    }
+
+    const handleBlur = (event) => {
+        const {name} = event.target;
+        setOnTouched({...onTouched, [name]: true})
+        const newErrors = validateRegister(form)
+        setErrors({...newErrors})
     }
 
     return (
@@ -57,8 +64,10 @@ const Register = () => {
                         value={form.name}
                         name="name"
                         placeholder="Mauricio Suarez"
-                        onChange={handleInputChange} />
-                        {/* {errors.name && <span className="error">{errors.name}</span>} */}
+                        onChange={handleInputChange} 
+                        onBlur={handleBlur}
+                        />
+                        {onTouched.name && errors.name && <p className={styles.error}>{errors.name}</p>}
                 </div>
                 <div>
                     <label>Email: </label>
@@ -67,8 +76,10 @@ const Register = () => {
                         value={form.email}
                         name="email"
                         placeholder="example@gmail.com"
-                        onChange={handleInputChange} />
-                        {/* {errors.name && <span className="error">{errors.name}</span>} */}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        />
+                        {onTouched.email && errors.email && <p className={styles.error}>{errors.email}</p>}
                 </div>
                 <div>
                     <label>Fecha de Nacimiento: </label>
@@ -77,8 +88,10 @@ const Register = () => {
                         value={form.birthdate}
                         name="birthdate"
                         placeholder="DD/MM/YYYY"
-                        onChange={handleInputChange} />
-                        {/* {errors.name && <span className="error">{errors.name}</span>} */}
+                        onChange={handleInputChange} 
+                        onBlur={handleBlur}
+                        />
+                        {onTouched.birthdate && errors.birthdate && <p className={styles.error}>{errors.birthdate}</p>}
                 </div>
                 <div>
                     <label>Número de DNI: </label>
@@ -87,8 +100,10 @@ const Register = () => {
                         value={form.nDni}
                         name="nDni"
                         placeholder="# de Identificacíon"
-                        onChange={handleInputChange} />
-                        {/* {errors.name && <span className="error">{errors.name}</span>} */}
+                        onChange={handleInputChange} 
+                        onBlur={handleBlur}
+                        />
+                        {onTouched.nDni && errors.nDni && <p className={styles.error}>{errors.nDni}</p>}
                 </div>
                 <div>
                     <label>Username: </label>
@@ -97,8 +112,10 @@ const Register = () => {
                         value={form.username}
                         name="username"
                         placeholder="username"
-                        onChange={handleInputChange} />
-                        {/* {errors.name && <span className="error">{errors.name}</span>} */}
+                        onChange={handleInputChange} 
+                        onBlur={handleBlur}
+                        />
+                        { onTouched.username && errors.username && <p className={styles.error}>{errors.username}</p>}
                 </div>
                 <div>
                     <label>Password: </label>
@@ -107,11 +124,13 @@ const Register = () => {
                         value={form.password} 
                         name="password"
                         placeholder="********"
-                        onChange={handleInputChange} />
-                        {/* {errors.name && <span className="error">{errors.name}</span>} */}
+                        onChange={handleInputChange} 
+                        onBlur={handleBlur}
+                        />
+                        { onTouched.password && errors.password && <p className={styles.error}>{errors.password}</p>}
                 </div>
                 <div>
-                    <button type="submit" onClick={handleSubmit}> Registrarse </button>
+                   <button type="submit" onClick={handleSubmit}> Registrarse </button>
                 </div>
             </div>
         </form>
