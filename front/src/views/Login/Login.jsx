@@ -28,7 +28,7 @@ const Login = () => {
             alert("Usuario invalido")
          }
       } catch (error) {
-         // console.error("No se pudo hacer el login con exito", error.response.data);
+         console.error("No se pudo hacer el login con exito", error.response.data);
          alert("Usuario no valido")
       }
 
