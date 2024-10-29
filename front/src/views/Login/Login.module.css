@@ -1,0 +1,41 @@
+.container {
+    margin: 250px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 50px;
+    background-color: #54c9f0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .container h2 {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .inputGallery {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .inputGallery div {
+    margin: 10px;
+  }
+  
+  .inputGallery button {
+    background-color: #4c8baf;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .inputGallery button:hover {
+    background-color: #108171;
+  }

@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import styles from "./Register.module.css"
-import { validateRegister } from "../../helpers/validateRegister";
+import validateRegister from "../../helpers/validateRegister";
 
 const Register = () => {
     const [form, setForm] = useState({
@@ -34,7 +34,7 @@ const Register = () => {
                 console.log(response);
                 alert("Registro Exitoso");
             } catch (error) {
-                console.error("Registro fallido: ", error.response.data);
+                console.error("Registro fallido", error.response.data);
             }
         }
     }

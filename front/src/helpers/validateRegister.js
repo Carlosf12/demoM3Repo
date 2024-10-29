@@ -1,4 +1,4 @@
-export const validateRegister = (input) => {
+const validateRegister = (input) => {
     const errors = {};
 
     const maxLength = 25; // Longitud máxima permitida
@@ -54,3 +54,7 @@ export const validateRegister = (input) => {
 
     return errors;
 }
+
+
+
+export default validateRegister;
