@@ -1,5 +1,5 @@
 import { useState } from "react"
-import validateLogin from "../../helpers/validateRegister"
+import validateLogin from "../../helpers/validateLogin"
 import axios from 'axios';
 import styles from './Login.module.css'
 
@@ -9,7 +9,7 @@ const Login = () => {
       password: ""
    })
 
-   const [erros, setErrors] = useState({
+   const [errors, setErrors] = useState({
       username: "",
       password: ""
    })
@@ -18,7 +18,7 @@ const Login = () => {
       event.preventDefault()
 
       const validationErrors = validateLogin(form);
-      setErrors(valid);
+      setErrors(validationErrors);
 
       if (Object.keys(validationErrors).length === 0) {
          try {
@@ -49,7 +49,7 @@ const Login = () => {
                   value={form.username}
                   onChange={handleInputChange}
                />
-               {erros.username && <p className="error-message">{erros.username}</p>}
+               {errors.username && <p className="error-message">{errors.username}</p>}
             </div>
             <div>
                {/* Password field */}
@@ -60,10 +60,10 @@ const Login = () => {
                   value={form.password}
                   onChange={handleInputChange}
                />
-               {erros.password && <p className="error-message">{erros.password}</p>}
+               {errors.password && <p className="error-message">{errors.password}</p>}
             </div>
             {/* Submit button */}
-            <button type="submit">Iniciar Sesión</button>
+            <button type="submit" onClick={handleSubmit}>Iniciar Sesión</button>
          </div>
       </form>
    );
