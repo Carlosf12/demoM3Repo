@@ -1,65 +1,71 @@
 :root {
-    --primary-color: #007bff; /* Replace with your desired primary color */
-    --secondary-color: #6c757d; /* Replace with your desired secondary color */
-    --tertiary-color: #ffc107; /* Replace with your desired tertiary color */
-    --white: #fff;
-    --black: #000;
-    --gray: #6c757d;
-    --success: #28a745;
-    --error: #dc3545;
-    --warning: #ffc107;
-    --info: #17a2b8;
-  }
+  --primary-color: #27b5a6;
+  --hover-color: #37f9e6;
+  --font-family: 'Quicksand', sans-serif; /* Replace with your desired font */
+  --link-color: #09424d; /* Adjust the link color */
+}
 
 .navBarContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: var(--primary-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-  }
-  
-  .logoSection {
-    display: flex;
-    align-items: center;
-    gap: 5rem;    
-  }
-  
-  .logoSection img {
-    width: 50px;
-    height: 50px;
-  }
-  
+.logoSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-left: 10%;
+}
+
+.logoSection img {
+  width: 40px;
+  height: 40px;
+}
+
+.linkSection {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.linkSection a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+  color: var(--link-color);
+  font-family: var(--font-family);
+}
+
+.linkSection a:hover {
+  color: var(--hover-color);
+}
+
+.avatarSection {
+  display: flex;
+  align-items: center;
+  margin-right: 10%;
+}
+
+.avatarSection img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
   .linkSection {
-    display: flex;
-    justify-content: space-between;
-    gap: 10rem;
-    color: var(--secondary-color);
+    display: none;
   }
-
-  .linkSection span:hover {
-    color: var(--tertiary-color); 
-    text-decoration: underline; 
-  }
-  
-  .linkSection span {
-    cursor: pointer;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .avatarSection {
-    display: flex;
-    align-items: center;
-  }
-  
-  .avatarSection img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
+}

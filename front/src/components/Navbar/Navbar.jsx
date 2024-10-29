@@ -1,6 +1,7 @@
 import styles from "./Navbar.module.css"
 import logo from "../../assets/customer-support.png"
 import userLogo from "../../assets/account.png"
+import { Link } from "react-router-dom"
 
 const Navbar = () => {
     return (
@@ -9,10 +10,10 @@ const Navbar = () => {
                 <img src={logo} alt="logo" />
             </div>
             <div className={styles.linkSection}>
-                <span>Home</span>
-                <span>Mis Turnos</span>
-                <span>About</span>
-                <span>Contacto</span>
+                <Link to="/home">Home</Link>
+                <Link to="/appointments/:id">Mis Turnos</Link>
+                <Link to="/users/register">Registrarse</Link>
+                <Link to="/">Login</Link>
             </div>
             <div className={styles.avatarSection}>
                 <div>
