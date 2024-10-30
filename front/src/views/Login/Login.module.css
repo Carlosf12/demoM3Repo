@@ -1,9 +1,9 @@
 :root {
-  --primary-color: #9AEDFF;
+  --primary-color: #9AEDFF; 
   --secondary-color: #007bff;
-  --tertiary-color: #fff;
-  --text-color: #333;
-  --hover-color: #e8e8e8;
+  --tertiary-color: #fff; 
+  --text-color: #333; 
+  --error-color: #ff0000; 
   --font-family: 'Quicksand', sans-serif;
 }
 
@@ -14,16 +14,10 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   width: 400px;
   margin-left: 31rem;
-  margin-top: 7rem;
+  margin-top: 7rem; 
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.container h2 {
-  font-family: var(--font-family);
-  text-align: center;
-  color: var(--text-color);
 }
 
 .inputGallery {
@@ -33,6 +27,7 @@
 }
 
 .inputGallery label {
+  font-family: var(--font-family);
   font-weight: bold;
   color: var(--text-color);
 }
@@ -54,11 +49,11 @@
 }
 
 .inputGallery button:hover {
-  background-color: darken(var(--secondary-color), 10%);
+  background-color: var(--text-color);
 }
 
 .errorMessage {
-  color: red;
+  color: var(--error-color); /* Use the defined error color */
   font-size: 12px;
   margin-top: 5px;
 }

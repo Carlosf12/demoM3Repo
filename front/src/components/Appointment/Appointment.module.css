@@ -1,11 +1,57 @@
+:root {
+    --primary-color: #9AEDFF;
+    --secondary-color: #007bff;
+    --tertiary-color: #ff2525;
+    --text-color: #333;
+    --hover-color: #e8e8e8;
+    --font-family: 'Quicksand', sans-serif;
+  }
+
+
 .container{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     width: 80%;
-    border: 3px solid black;
+    
     padding: 35px;
     margin: 20px;
     border-radius: 1%;
+    background-color: var(--primary-color);
  }
+
+ .date{
+    font-family: var(--font-family);
+  text-align: center;
+  color: var(--text-color);
+ }
+
+ .time{
+    font-family: var(--font-family);
+  text-align: center;
+  color: var(--text-color);
+ }
+
+
+
+.container button {
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-family);
+  }
+
+.container button:hover{
+  background-color: var(--text-color);
+}
+
+.status{
+  font-family: var(--font-family);
+  text-align: center;
+  color: rgb(168, 13, 103);
+}
+

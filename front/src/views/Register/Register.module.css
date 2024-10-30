@@ -52,7 +52,7 @@
 }
 
 .inputGallery button:hover {
-  background-color: darken(var(--secondary-color), 10%);
+  background-color: var(--text-color);
 }
 
 .error {
