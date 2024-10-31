@@ -49,6 +49,7 @@ const Login = () => {
 
    return (
       <form onSubmit={handleSubmit} className={styles.container}>
+         <h1>Login</h1>
          <div className={styles.inputGallery}>
             <div>
                {/* Username field */}

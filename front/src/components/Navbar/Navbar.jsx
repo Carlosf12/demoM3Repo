@@ -1,5 +1,5 @@
 import styles from "./Navbar.module.css"
-import logo from "../../assets/customer-support.png"
+import logo from "../../assets/tooth.png"
 import userLogo from "../../assets/account.png"
 import { Link } from "react-router-dom"
 

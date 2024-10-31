@@ -20,6 +20,11 @@
   align-items: center;
 }
 
+h1 {
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
 .inputGallery {
   display: flex;
   flex-direction: column;
@@ -53,7 +58,7 @@
 }
 
 .errorMessage {
-  color: var(--error-color); /* Use the defined error color */
+  color: var(--error-color); 
   font-size: 12px;
   margin-top: 5px;
 }

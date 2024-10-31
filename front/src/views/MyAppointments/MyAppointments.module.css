@@ -20,3 +20,9 @@
     color: var(--text-color);
 }
 
+.description {
+    font-family: var(--font-family);
+    text-align: center;
+    color: var(--text-color);
+}
+
