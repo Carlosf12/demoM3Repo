@@ -2,6 +2,9 @@ import axios from "axios"
 import { useState } from "react"
 import styles from "./Register.module.css"
 import validateRegister from "../../helpers/validateRegister";
+import Footer from "../../components/Footer/Footer";
+import girlImage from "../../assets/girlSmiling.jpg"
+import manImage from "../../assets/manDentist.jpg"
 
 const Register = () => {
     const [form, setForm] = useState({
@@ -54,86 +57,96 @@ const Register = () => {
     }
 
     return (
-        <form className={styles.container}>
-            <h2>Formulario de Registro</h2>
-            <div className={styles.inputGallery}>
-                <div>
-                    <label>Nombre: </label>
-                    <input
-                        type="text"
-                        value={form.name}
-                        name="name"
-                        placeholder="Mauricio Suarez"
-                        onChange={handleInputChange} 
-                        onBlur={handleBlur}
-                        />
-                        {onTouched.name && errors.name && <p className={styles.error}>{errors.name}</p>}
-                </div>
-                <div>
-                    <label>Email: </label>
-                    <input
-                        type="text"
-                        value={form.email}
-                        name="email"
-                        placeholder="example@gmail.com"
-                        onChange={handleInputChange}
-                        onBlur={handleBlur}
-                        />
-                        {onTouched.email && errors.email && <p className={styles.error}>{errors.email}</p>}
-                </div>
-                <div>
-                    <label>Fecha de Nacimiento: </label>
-                    <input
-                        type="date"
-                        value={form.birthdate}
-                        name="birthdate"
-                        placeholder="DD/MM/YYYY"
-                        onChange={handleInputChange} 
-                        onBlur={handleBlur}
-                        />
-                        {onTouched.birthdate && errors.birthdate && <p className={styles.error}>{errors.birthdate}</p>}
-                </div>
-                <div>
-                    <label>Número de DNI: </label>
-                    <input
-                        type="text"
-                        value={form.nDni}
-                        name="nDni"
-                        placeholder="# de Identificacíon"
-                        onChange={handleInputChange} 
-                        onBlur={handleBlur}
-                        />
-                        {onTouched.nDni && errors.nDni && <p className={styles.error}>{errors.nDni}</p>}
-                </div>
-                <div>
-                    <label>Username: </label>
-                    <input
-                        type="text"
-                        value={form.username}
-                        name="username"
-                        placeholder="username"
-                        onChange={handleInputChange} 
-                        onBlur={handleBlur}
-                        />
-                        { onTouched.username && errors.username && <p className={styles.error}>{errors.username}</p>}
-                </div>
-                <div>
-                    <label>Password: </label>
-                    <input
-                        type="password"
-                        value={form.password} 
-                        name="password"
-                        placeholder="********"
-                        onChange={handleInputChange} 
-                        onBlur={handleBlur}
-                        />
-                        { onTouched.password && errors.password && <p className={styles.error}>{errors.password}</p>}
-                </div>
-                <div>
-                   <button type="submit" onClick={handleSubmit}> Registrarse </button>
-                </div>
+        <div className={styles.registerContainer}>
+            <div className={styles.formSection}>
+                <form className={styles.container}>
+                    <h2>Formulario de Registro</h2>
+                    <div className={styles.inputGallery}>
+                        <div>
+                            <label>Nombre: </label>
+                            <input
+                                type="text"
+                                value={form.name}
+                                name="name"
+                                placeholder="Mauricio Suarez"
+                                onChange={handleInputChange} 
+                                onBlur={handleBlur}
+                                />
+                                {onTouched.name && errors.name && <p className={styles.error}>{errors.name}</p>}
+                        </div>
+                        <div>
+                            <label>Email: </label>
+                            <input
+                                type="text"
+                                value={form.email}
+                                name="email"
+                                placeholder="example@gmail.com"
+                                onChange={handleInputChange}
+                                onBlur={handleBlur}
+                                />
+                                {onTouched.email && errors.email && <p className={styles.error}>{errors.email}</p>}
+                        </div>
+                        <div>
+                            <label>Fecha de Nacimiento: </label>
+                            <input
+                                type="date"
+                                value={form.birthdate}
+                                name="birthdate"
+                                placeholder="DD/MM/YYYY"
+                                onChange={handleInputChange} 
+                                onBlur={handleBlur}
+                                />
+                                {onTouched.birthdate && errors.birthdate && <p className={styles.error}>{errors.birthdate}</p>}
+                        </div>
+                        <div>
+                            <label>Número de DNI: </label>
+                            <input
+                                type="text"
+                                value={form.nDni}
+                                name="nDni"
+                                placeholder="# de Identificacíon"
+                                onChange={handleInputChange} 
+                                onBlur={handleBlur}
+                                />
+                                {onTouched.nDni && errors.nDni && <p className={styles.error}>{errors.nDni}</p>}
+                        </div>
+                        <div>
+                            <label>Username: </label>
+                            <input
+                                type="text"
+                                value={form.username}
+                                name="username"
+                                placeholder="username"
+                                onChange={handleInputChange} 
+                                onBlur={handleBlur}
+                                />
+                                { onTouched.username && errors.username && <p className={styles.error}>{errors.username}</p>}
+                        </div>
+                        <div>
+                            <label>Password: </label>
+                            <input
+                                type="password"
+                                value={form.password} 
+                                name="password"
+                                placeholder="********"
+                                onChange={handleInputChange} 
+                                onBlur={handleBlur}
+                                />
+                                { onTouched.password && errors.password && <p className={styles.error}>{errors.password}</p>}
+                        </div>
+                        <div>
+                        <button type="submit" onClick={handleSubmit}> Registrarse </button>
+                        </div>
+                    </div>
+                <Footer />
+                </form>
             </div>
-        </form>
+            <h2 className={styles.registerMessage}>¡Sonríe al mundo y que el mundo te sonría a ti!</h2>
+            <div className={styles.imageSection}>
+                <img src={girlImage} alt="" />
+                <img src={manImage} alt="" />
+            </div>
+        </div>
     )
 
 }

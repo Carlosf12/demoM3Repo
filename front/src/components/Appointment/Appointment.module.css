@@ -52,6 +52,16 @@
 .status{
   font-family: var(--font-family);
   text-align: center;
-  color: rgb(168, 13, 103);
+  background-color:antiquewhite;
+  color: #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 
+.status.active {
+  background-color: green;
+}
+
+.status.cancelled {
+  background-color: red;
+}

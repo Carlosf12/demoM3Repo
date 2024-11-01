@@ -1,3 +1,4 @@
+import Footer from "../../components/Footer/Footer";
 import ImgText from "../../components/ImgText/ImgText"
 
 const Home = () => {
@@ -5,7 +6,9 @@ const Home = () => {
     return(
         <div>
             <ImgText />
+            <Footer />
         </div>
+
     )
 }
 

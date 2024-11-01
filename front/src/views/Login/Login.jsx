@@ -2,6 +2,8 @@ import { useState } from "react"
 import validateLogin from "../../helpers/validateLogin"
 import axios from 'axios';
 import styles from './Login.module.css'
+import Footer from "../../components/Footer/Footer";
+import logo from "../../assets/toothLogo2.png"
 
 const Login = () => {
    const [form, setForm] = useState({
@@ -50,6 +52,9 @@ const Login = () => {
    return (
       <form onSubmit={handleSubmit} className={styles.container}>
          <h1>Login</h1>
+         <img src={logo} alt="imageLogo"className={styles.imageLogo} />
+         <h3 className={styles.titleLogo}>TuutTooth</h3>
+         <h4 className={styles.logoQuote}>Sonrie sin preocupaciones!</h4>
          <div className={styles.inputGallery}>
             <div>
                {/* Username field */}
@@ -78,6 +83,7 @@ const Login = () => {
             {/* Submit button */}
             <button type="submit" onClick={handleSubmit}>Iniciar Sesión</button>
          </div>
+         <Footer />
       </form>
    );
 
