@@ -1,12 +1,15 @@
-import axios from "axios"
-import { useState } from "react"
-import styles from "./Register.module.css"
+import axios from "axios";
+import { useState } from "react";
+import styles from "./Register.module.css";
 import validateRegister from "../../helpers/validateRegister";
 import Footer from "../../components/Footer/Footer";
-import girlImage from "../../assets/girlSmiling.jpg"
-import manImage from "../../assets/manDentist.jpg"
+import girlImage from "../../assets/girlSmiling.jpg";
+import manImage from "../../assets/manDentist.jpg";
+import { Link, useNavigate } from "react-router-dom";
+import { SLASH } from "../../helpers/routes";
 
 const Register = () => {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -22,16 +25,14 @@ const Register = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const validationErrors = validateRegister(form);   
-
         setErrors(validationErrors);
 
             try {
-                if(!Object.keys(errors).length === 0){
-                    const response = await axios.post("http://localhost:3000/users/register", form);
-                    console.log(response);
+                if(!Object.keys(errors).length){
+                    await axios.post("http://localhost:3000/users/register", form);
                     alert("Registro Exitoso");
+                    navigate(SLASH)
                 }
                 else{
                     alert("Errores en el formulario")
@@ -137,14 +138,15 @@ const Register = () => {
                         <div>
                         <button type="submit" onClick={handleSubmit}> Registrarse </button>
                         </div>
+                        <p>Ya estas registrado? Registrate haciendo click <Link to={SLASH}>AQUI</Link> </p>
                     </div>
                 <Footer />
                 </form>
             </div>
             <h2 className={styles.registerMessage}>¡Sonríe al mundo y que el mundo te sonría a ti!</h2>
             <div className={styles.imageSection}>
-                <img src={girlImage} alt="" />
-                <img src={manImage} alt="" />
+                <img src={girlImage} alt="girl-smiling-image" />
+                <img src={manImage} alt="man-smiling-image" />
             </div>
         </div>
     )

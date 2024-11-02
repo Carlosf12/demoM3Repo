@@ -5,6 +5,7 @@ import Register from './views/Register/Register';
 import Login from './views/Login/Login';
 import { Routes, Route } from 'react-router-dom';
 import Home from './views/Home/Home';
+import { HOME, MY_APPOINTMENTS, SLASH, USER_REGISTER } from './helpers/routes';
 
 function App() {
 
@@ -12,10 +13,10 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path='/home' element={<Home />} />
-        <Route path='/' element={<Login />} />
-        <Route path='/appointments/:id' element={<MyAppointments />} />
-        <Route path='/users/register' element={<Register />} />
+        <Route path={HOME} element={<Home />} />
+        <Route path= {SLASH} element={<Login />} />
+        <Route path={MY_APPOINTMENTS} element={<MyAppointments />} />
+        <Route path={USER_REGISTER} element={<Register />} />
       </Routes>
     </>
   )

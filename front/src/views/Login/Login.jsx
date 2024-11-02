@@ -1,11 +1,15 @@
-import { useState } from "react"
-import validateLogin from "../../helpers/validateLogin"
+import { useState } from "react";
+import validateLogin from "../../helpers/validateLogin";
 import axios from 'axios';
-import styles from './Login.module.css'
+import styles from './Login.module.css';
 import Footer from "../../components/Footer/Footer";
-import logo from "../../assets/toothLogo2.png"
+import logo from "../../assets/toothLogo2.png";
+import { Link, useNavigate } from 'react-router-dom';
+import { MY_APPOINTMENTS, USER_REGISTER } from '../../helpers/routes'
 
 const Login = () => {
+   const navigate = useNavigate();
+
    const [form, setForm] = useState({
       username: "",
       password: ""
@@ -23,9 +27,8 @@ const Login = () => {
 
       try {
          if (Object.keys(validationErrors).length === 0) {
-            const response = await axios.post("http://localhost:3000/users/login", form);
-            console.log(response);
-            alert("Bienvenido")
+            await axios.post("http://localhost:3000/users/login", form);
+            navigate(MY_APPOINTMENTS);
          } else {
             alert("Usuario invalido")
          }
@@ -43,48 +46,52 @@ const Login = () => {
    }
 
    const handleBlur = (event) => {
-      const {name} = event.target;
-      setOnTouched({...onTouched, [name]: true})
+      const { name } = event.target;
+      setOnTouched({ ...onTouched, [name]: true })
       const newErrors = validateLogin(form)
-      setErrors({...newErrors})
-  }
+      setErrors({ ...newErrors })
+   }
 
    return (
-      <form onSubmit={handleSubmit} className={styles.container}>
-         <h1>Login</h1>
-         <img src={logo} alt="imageLogo"className={styles.imageLogo} />
-         <h3 className={styles.titleLogo}>TuutTooth</h3>
-         <h4 className={styles.logoQuote}>Sonrie sin preocupaciones!</h4>
-         <div className={styles.inputGallery}>
-            <div>
-               {/* Username field */}
-               <label>Username:</label>
-               <input
-                  type="text"
-                  name="username"
-                  value={form.username}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-               />
-               {onTouched.username && errors.username && <p className={styles.errorMessage}>{errors.username}</p>}
+      <div>
+         <form onSubmit={handleSubmit} className={styles.container}>
+            <h1>Login</h1>
+            <img src={logo} alt="imageLogo" className={styles.imageLogo} />
+            <h3 className={styles.titleLogo}>TuutTooth</h3>
+            <h4 className={styles.logoQuote}>Sonrie sin preocupaciones!</h4>
+            <div className={styles.inputGallery}>
+               <div>
+                  {/* Username field */}
+                  <label>Username:</label>
+                  <input
+                     type="text"
+                     name="username"
+                     value={form.username}
+                     onChange={handleInputChange}
+                     onBlur={handleBlur}
+                  />
+                  {onTouched.username && errors.username && <p className={styles.errorMessage}>{errors.username}</p>}
+               </div>
+               <div>
+                  {/* Password field */}
+                  <label> Password: </label>
+                  <input
+                     type="password"
+                     name="password"
+                     value={form.password}
+                     onChange={handleInputChange}
+                     onBlur={handleBlur}
+                  />
+                  {onTouched.password && errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
+               </div>
+               {/* Submit button */}
+               <button type="submit" onClick={handleSubmit}>Iniciar Sesión</button>
+               <p>No estas registrado? Registrate haciendo click <Link to={USER_REGISTER}>AQUI</Link> </p>
             </div>
-            <div>
-               {/* Password field */}
-               <label> Password: </label>
-               <input
-                  type="password"
-                  name="password"
-                  value={form.password}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-               />
-               {onTouched.password && errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
-            </div>
-            {/* Submit button */}
-            <button type="submit" onClick={handleSubmit}>Iniciar Sesión</button>
-         </div>
-         <Footer />
-      </form>
+            <Footer />
+         </form>
+         
+      </div>
    );
 
 }
