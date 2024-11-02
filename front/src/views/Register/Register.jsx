@@ -138,7 +138,7 @@ const Register = () => {
                         <div>
                         <button type="submit" onClick={handleSubmit}> Registrarse </button>
                         </div>
-                        <p>Ya estas registrado? Registrate haciendo click <Link to={SLASH}>AQUI</Link> </p>
+                        <p>Ya estas registrado? Inicia sesíon haciendo click <Link to={SLASH}>AQUI</Link> </p>
                     </div>
                 <Footer />
                 </form>

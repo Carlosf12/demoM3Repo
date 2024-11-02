@@ -1,8 +1,9 @@
-import styles from './MyAppointments.module.css'
+import styles from './MyAppointments.module.css';
 import { Appointments } from '../../components/Appointments/Appointments';
 import Footer from '../../components/Footer/Footer';
-import smileGirlImage from "../../assets/smilegirl2.webp"
-import kidSmileImage from "../../assets/kidSmiling.jpg"
+import smileGirlImage from "../../assets/smilegirl2.webp";
+import kidSmileImage from "../../assets/kidSmiling.jpg";
+
 const MyAppointments = () => {
     return (
         <div className={styles.container}>

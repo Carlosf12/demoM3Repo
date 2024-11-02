@@ -5,7 +5,7 @@ import styles from './Login.module.css';
 import Footer from "../../components/Footer/Footer";
 import logo from "../../assets/toothLogo2.png";
 import { Link, useNavigate } from 'react-router-dom';
-import { MY_APPOINTMENTS, USER_REGISTER } from '../../helpers/routes'
+import { USER_REGISTER } from '../../helpers/routes';
 
 const Login = () => {
    const navigate = useNavigate();
