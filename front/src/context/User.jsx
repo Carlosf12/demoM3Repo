@@ -2,28 +2,33 @@ import { createContext, useState, useEffect } from "react";
 import axios from 'axios';
 
 export const UserContext = createContext({
-    loggedUser: null,
-    setLoggedUser: () => { }
+    user: null,
+    userAppointments: [],
+    setUser: () => {},
+    setUserAppointments: () => {}
 });
 
 export const UserProvider = ({ children }) => {
-    const [loggedUser, setLoggedUser] = useState(null);
+    const [user, setUser] = useState(null);
+    const [userAppointments, setUserAppointments] = useState([]);
 
     useEffect(() => {
-        const fetchUser = async () => {
+        const fetchUserData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/users');
+                const response = await axios.get(`http://localhost:3000/users/:id`); 
                 setUser(response.data);
+                const appointmentsResponse = await axios.get(`http://localhost:3000/appointments/${response.data.id}`); 
+                setUserAppointments(appointmentsResponse.data);
             } catch (error) {
-                console.error('Error fetching user:', error);
+                console.error('Error fetching user data:', error);
             }
         };
 
-        fetchUser();
+        fetchUserData();
     }, []);
 
     return (
-        <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
+        <UserContext.Provider value={{ user, userAppointments, setUser, setUserAppointments }}>
             {children}
         </UserContext.Provider>
     );

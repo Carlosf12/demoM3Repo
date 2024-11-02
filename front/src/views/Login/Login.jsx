@@ -5,7 +5,7 @@ import styles from './Login.module.css';
 import Footer from "../../components/Footer/Footer";
 import logo from "../../assets/toothLogo2.png";
 import { Link, useNavigate } from 'react-router-dom';
-import { USER_REGISTER } from '../../helpers/routes';
+import { USER_REGISTER, MY_APPOINTMENTS } from '../../helpers/routes';
 
 const Login = () => {
    const navigate = useNavigate();
@@ -28,12 +28,13 @@ const Login = () => {
       try {
          if (Object.keys(validationErrors).length === 0) {
             await axios.post("http://localhost:3000/users/login", form);
+            alert("Inicio de sesíon exitosa, bienvenido!")
             navigate(MY_APPOINTMENTS);
          } else {
             alert("Usuario invalido")
          }
       } catch (error) {
-         console.error("No se pudo hacer el login con exito", error.response.data);
+         console.error("No se pudo hacer el login con exito", error);
          alert("Usuario no valido")
       }
 

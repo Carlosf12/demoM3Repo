@@ -4,6 +4,7 @@ import Footer from '../../components/Footer/Footer';
 import smileGirlImage from "../../assets/smilegirl2.webp";
 import kidSmileImage from "../../assets/kidSmiling.jpg";
 
+
 const MyAppointments = () => {
     return (
         <div className={styles.container}>
