@@ -24,9 +24,13 @@ const MyAppointments = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/appointments/schedule");
+            const response = await axios.post("http://localhost:3000/appointments/schedule",{
+                date: newApp.date,
+                time: newApp.time,
+                userId: user.id
+            });
             console.log("Turno creado con exito", response.data);
-            setNewApp({ date: '', time: '', status: 'Active' })
+            setNewApp({ date: '', time: '', status: 'Active' });
         } catch (error) {
             console.error("Error al crear el turno:", error)
         }

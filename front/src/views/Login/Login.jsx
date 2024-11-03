@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import validateLogin from "../../helpers/validateLogin";
 import axios from 'axios';
 import styles from './Login.module.css';
@@ -6,9 +6,11 @@ import Footer from "../../components/Footer/Footer";
 import logo from "../../assets/toothLogo2.png";
 import { Link, useNavigate } from 'react-router-dom';
 import { USER_REGISTER, MY_APPOINTMENTS } from '../../helpers/routes';
+import { UserContext } from "../../context/UserContext";
 
 const Login = () => {
    const navigate = useNavigate();
+   const { setUser } = useContext(UserContext);
 
    const [form, setForm] = useState({
       username: "",
@@ -27,7 +29,9 @@ const Login = () => {
 
       try {
          if (Object.keys(validationErrors).length === 0) {
-            await axios.post("http://localhost:3000/users/login", form);
+            const res = await axios.post("http://localhost:3000/users/login", form);
+             const loggedUser = setUser(res.data);
+             console.log(loggedUser);
             alert("Inicio de sesíon exitosa, bienvenido!")
             navigate(MY_APPOINTMENTS);
          } else {

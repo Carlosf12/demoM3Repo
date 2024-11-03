@@ -2,17 +2,15 @@ import { useContext, useEffect, useState } from "react"
 import Appointment from "../Appointment/Appointment"
 import styles from "./Appointments.module.css"
 import axios from 'axios'
-import {UserContext} from "../../context/User"
+import {UserContext} from "../../context/UserContext"
+import {HOME} from "../../helpers/routes"
+import {useNavigate} from "react-router-dom"
 
 export const Appointments = () => {
+    const {user , fetchUserAppointments} = useContext(UserContext);
     const [appointments, setAppointments] = useState([]);
-    const [flag, setFlag] = useState(false)
-
-    // useEffect(()=>{
-    //     axios.get("http://localhost:3000/appointments")
-    //     .then(res => setAppointments(res.data))
-    //     .catch((err) => alert(err.res.data.message))
-    // },[flag]);
+    const [flag, setFlag] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         const fetchApp = async () => {
@@ -24,7 +22,19 @@ export const Appointments = () => {
             }
         };
         fetchApp();
-    }, [])
+    }, [user, fetchUserAppointments, navigate])
+
+    // useEffect(() => {
+    //     if(!user) {
+    //         navigate(HOME);
+    //     } else {
+    //         fetchUserAppointments(user.id);
+    //     }
+    // }, [user, fetchUserAppointments, navigate]);
+
+    // useEffect(()=>{
+    //     setAppointments(user.appointments);
+    // }, [user.appointments])
 
 
     const handleCancelApp = async (id) => {
