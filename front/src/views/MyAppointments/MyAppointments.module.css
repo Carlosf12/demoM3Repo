@@ -75,3 +75,9 @@
 .formContainer button:hover {
     background-color: var(--text-color);
 }
+
+.error{
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
