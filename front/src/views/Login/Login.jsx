@@ -1,45 +1,44 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import validateLogin from "../../helpers/validateLogin";
 import axios from 'axios';
 import styles from './Login.module.css';
 import Footer from "../../components/Footer/Footer";
 import logo from "../../assets/toothLogo2.png";
 import { Link, useNavigate } from 'react-router-dom';
-import { USER_REGISTER, MY_APPOINTMENTS } from '../../helpers/routes';
-import { UserContext } from "../../context/UserContext";
+import { USER_REGISTER, HOME } from '../../helpers/routes';
+import { useUserContext } from "../../context/UserContext";
 
 const Login = () => {
    const navigate = useNavigate();
-   const { setUser } = useContext(UserContext);
-
+   const { updateUser } = useUserContext();
    const [form, setForm] = useState({
       username: "",
       password: ""
-   })
-
-   const [errors, setErrors] = useState({})
-   const [onTouched, setOnTouched] = useState({})
+   });
+   const [errors, setErrors] = useState({});
+   const [onTouched, setOnTouched] = useState({});
+   const [loginError, setLoginError] = useState("");
+   const [loading, setLoading] = useState(false);
 
    const handleSubmit = async (event) => {
       event.preventDefault()
+      setLoading(true);
+      setLoginError("");
 
       const validationErrors = validateLogin(form);
       setErrors(validationErrors);
 
-
       try {
-         if (Object.keys(validationErrors).length === 0) {
-            const res = await axios.post("http://localhost:3000/users/login", form);
-             const loggedUser = setUser(res.data);
-             console.log(loggedUser);
-            alert("Inicio de sesíon exitosa, bienvenido!")
-            navigate(MY_APPOINTMENTS);
-         } else {
-            alert("Usuario invalido")
-         }
+         const res = await axios.post("http://localhost:3000/users/login", form);
+         console.log("Datos de usuario recibidos al loguearse:", res.data);
+         updateUser(res.data.user);
+         alert("Login exitoso");
+         setForm({ username: "", password: "" })
+         navigate(HOME);
       } catch (error) {
-         console.error("No se pudo hacer el login con exito", error);
-         alert("Usuario no valido")
+         alert("Usuario o contraseña incorrectos.")
+      } finally {
+         setLoading(false);
       }
 
    }
@@ -60,6 +59,7 @@ const Login = () => {
    return (
       <div>
          <form onSubmit={handleSubmit} className={styles.container}>
+            {loginError && <p className={styles.errorMessage}>{loginError}</p>}
             <h1>Login</h1>
             <img src={logo} alt="imageLogo" className={styles.imageLogo} />
             <h3 className={styles.titleLogo}>TuutTooth</h3>
@@ -95,7 +95,7 @@ const Login = () => {
             </div>
             <Footer />
          </form>
-         
+
       </div>
    );
 
