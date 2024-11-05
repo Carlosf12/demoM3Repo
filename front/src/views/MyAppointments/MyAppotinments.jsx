@@ -39,9 +39,10 @@ const MyAppointments = () => {
 
         const validationError = validateNewAppointment(newApp);
         if (Object.keys(validationError).length > 0) {
-            return; 
+            console.log(validationError);
+            return;
         }
-    
+
         try {
             const res = await axios.post("http://localhost:3000/appointments/schedule", {
                 date: newApp.date,
