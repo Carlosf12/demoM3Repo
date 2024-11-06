@@ -40,6 +40,8 @@ const Register = () => {
             } catch (error) {
                 console.error("Registro fallido", error.response.data);
             }
+
+            
         
     }
 

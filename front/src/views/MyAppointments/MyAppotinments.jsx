@@ -34,12 +34,13 @@ const MyAppointments = () => {
         }
     }, [user, navigate]);
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const validationError = validateNewAppointment(newApp);
         if (Object.keys(validationError).length > 0) {
-            console.log(validationError);
+            setNewAppError(validationError);
             return;
         }
 
